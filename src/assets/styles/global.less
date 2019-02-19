@@ -1,0 +1,445 @@
+/*********************************************************************************************
+Components
+    Global/helper styles
+    Typography
+    Colors
+    Helper class
+    Backgrounds
+    Align content
+    Header
+**********************************************************************************************/
+
+/*********************************************************************************************
+Global/helper styles
+**********************************************************************************************/
+
+:root {
+    font-size: @base-font-size;
+    font-family: @font-family;
+    color: @base-color;
+}
+
+html,
+body {
+    font-family: @font-family;
+    font-size: @base-font-size;
+    font-weight: @regular;
+    line-height: 1.4;
+    color: @base-color;
+    position: relative;
+    height: 100% !important;
+    width: 100% !important;
+    background-color: @lt-grey  !important;
+}
+
+/* ----------------------------
+Typography
+------------------------------- */
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+h1 {
+    .font-size(30px);
+}
+
+h2 {
+    .font-size(24px);
+}
+
+h3 {
+    .font-size(20px);
+}
+
+h4 {
+    .font-size(15px);
+    font-weight: @bold;
+}
+
+h6 {
+    line-height: 1;
+    letter-spacing: 0.5px;
+    color: #e6593b;
+    white-space: nowrap;
+}
+
+.small {
+    .font-size(12px);
+}
+
+.font-regular {
+    font-weight: @regular;
+}
+
+.font-medium {
+    font-weight: @medium;
+}
+
+.font-bold {
+    font-weight: @bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+/*.btn-primary {
+  background-color: #e6593b !important;
+  border-color: #e6593b !important;
+}*/
+
+/* ----------------------------
+Colors
+------------------------------- */
+
+.white {
+    color: @white;
+}
+
+.black {
+    color: @black;
+}
+
+.blue {
+    color: @blue;
+}
+
+.green {
+    color: @green;
+}
+
+.red {
+    color: @red;
+}
+
+.grey {
+    color: @base-color;
+}
+
+/* ----------------------------
+Helper class
+------------------------------- */
+
+.nopad {
+    padding: 0;
+}
+
+.nopad-left {
+    padding-left: 0;
+}
+
+.nopad-right {
+    padding-right: 0;
+}
+
+.nopad-top {
+    padding-top: 0 !important;
+}
+
+.nopad-bottom {
+    padding-bottom: 0 !important;
+}
+
+.nomargin {
+    margin: 0 !important;
+}
+
+.text-underline {
+    text-decoration: underline;
+}
+
+/* ----------------------------
+Backgrounds
+------------------------------- */
+
+.white-bg {
+    background: @white;
+    padding: 70px 0;
+    @media @mobile {
+        padding: 40px 0;
+    }
+}
+
+/* ----------------------------
+ Form Controls
+------------------------------- */
+
+.form-control {
+    border-radius: 0;
+    border-color: @bdr-grey;
+    box-shadow: none;
+}
+
+/* ----------------------------
+ CTA button
+------------------------------- */
+
+a {
+    .linkColor(@red);
+}
+
+/* ----------------------------
+Align content
+------------------------------- */
+
+.align-right {
+    text-align: right;
+    @media @mobile {
+        text-align: left;
+    }
+}
+
+.align-left {
+    text-align: left;
+    @media @mobile {
+        text-align: center;
+    }
+}
+
+/* ---------------------------
+Header
+---------------------------- */
+
+.header {
+    position: relative;
+    z-index: 1010;
+    background-color: @white;
+    padding: 0;
+    .logo-block {
+        padding: 3px 0 6px 25px;
+        /*width: 265px;*/
+        a {
+            display: inline-block;
+            &.sidebar-toggle {
+                padding: 7px;
+                line-height: 1;
+                background-color: @lt-grey;
+                color: #707070;
+                margin-left: 50px;
+                .transition(0.3s);
+                .transition-property(all);
+                .transition-timing-function(ease);
+                @media @mobile {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+/* ----------------------------
+Dashboard
+------------------------------- */
+
+.sidebar {
+    width: 180px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    .linear-gradient-top(#E6593B, #E6593B, 25%, #E55436, 50%, #E14323, 75%, #DC2A06, 100%);
+    min-height: 100%;
+    z-index: 1000;
+    padding-top: 60px;
+    .transition(0.3s);
+    .transition-property(all);
+    .transition-timing-function(ease);
+    @media @mobile {
+        width: 45px;
+    }
+    ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        margin-top: 2px;
+        li {
+            display: block;
+            padding: 0;
+            a {
+                display: block;
+                padding: 12px;
+                .white;
+                .transition(0.3s);
+                .transition-property(all);
+                .transition-timing-function(ease);
+                @media @mobile {
+                    padding: 15px;
+                }
+                span {
+                    padding-left: 20px;
+                    i {
+                        .font-size(16px);
+                    }
+                    @media @mobile {
+                        display: none;
+                    }
+                }
+                &:hover {
+                    padding-left: 20px;
+                    .transition(0.3s);
+                    .transition-property(all);
+                    .transition-timing-function(ease);
+                    background: #DC2A06;
+                    border-left: 5px solid #c5533c;
+                }
+                &.active {
+                    background: #DC2A06;
+                    border-left: 5px solid #c5533c;
+                    border-bottom: 1px solid #DC2A06;
+                }
+            }
+        }
+    }
+}
+
+.main-wrapper {
+    margin-left: 180px;
+    background-color: green;
+    z-index: 999;
+    background-color: @lt-grey;
+    .transition(0.3s);
+    .transition-property(all);
+    .transition-timing-function(ease);
+    .content {
+        padding: 5px;
+    }
+    @media @mobile {
+        margin-left: 45px;
+    }
+}
+
+.redbutton {
+    color: #fff;
+    background-color: #DC2A06;
+    border-color: #DC2A06;
+    padding: 8px 50px;
+    border-radius: 5px;
+    &:hover {
+        background: #dc2a06d6;
+        transition: 0.5s;
+    }
+    @media @mobile {
+        padding: 8px 30px !important;
+    }
+}
+
+.filter-bar {
+    position: fixed;
+    top: 69px;
+    right: 6px;
+    width: 14%;
+    @media @mobile {
+        position: relative;
+        top: 10px;
+        right: 0px;
+        display: flex;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+}
+
+.sidebar-small {
+    .header {
+        .logo-block {
+            a {
+                &.sidebar-toggle {
+                    margin-left: 10px;
+                    .transition(0.3s);
+                    .transition-property(all);
+                    .transition-timing-function(ease);
+                }
+            }
+        }
+    }
+    .sidebar {
+        width: 75px;
+        .transition(0.3s);
+        .transition-property(all);
+        .transition-timing-function(ease);
+        ul {
+            li {
+                a {
+                    span {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+    .main-wrapper {
+        margin-left: 75px;
+        .transition(0.3s);
+        .transition-property(all);
+        .transition-timing-function(ease);
+    }
+}
+
+/*** Card Css ***/
+
+.card {
+    background-color: @white;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 18px;
+    .card-header {
+        background-color: @white;
+        padding: 15px;
+        border-bottom: 1px solid @bdr-grey;
+        display: -ms-flexbox;
+        display: flex;
+        -ms-flex-align: center;
+        align-items: center;
+        line-height: 1;
+        strong {
+            i {
+                padding-right: 15px;
+                .font-size(16px);
+                .font-bold;
+            }
+        }
+        select {
+            width: 210px;
+        }
+    }
+    .card-body {
+        padding: 15px 20px;
+        position: relative;
+    }
+}
+
+/*** Table css ***/
+
+.districts-table {
+    height: 600px;
+    .table {
+        thead {
+            th {
+                padding-top: 15px;
+                border-top: none;
+            }
+        }
+        td,
+        th {
+            padding: 24px 20px 20px;
+            line-height: 1;
+        }
+    }
+    .mCSB_scrollTools {
+        .mCSB_draggerRail {
+            width: 9px;
+            background-color: #e2e0e0;
+        }
+        .mCSB_dragger {
+            .mCSB_dragger_bar {
+                width: 9px;
+                background-color: #b9b9b9;
+            }
+        }
+    }
+}

@@ -1,0 +1,196 @@
+<div class="content">
+
+  <div class="row margin0 d-flex margin-right0 mb-1">
+    <div class="col-md-8 col-xs-12 bgc-white border paddding2 ">
+      <div class="google-map">
+        <app-google-map [seletedState]="seletedState" [selectedStateData]="getAllStatsData" [states]="allStateName"
+          (stateChangeO)="onstateChange($event)"></app-google-map>
+      </div>
+    </div>
+
+
+    <div class="col-md-4 col-xs-12 chart-side ">
+      <div class="row mb-1">
+        <div class="col-lg-12 border bgc-white paddding0">
+          <div class="content-header w-100 p-1">
+            <div class="filtring">
+              <h6><i class="ti-stats-up" style="color: green;"></i> {{maxDistrictName}}</h6>
+              <span class="align-right">
+                <div class="badge badge-pill badge-success float-right mr-1">SCORE: {{highestScore}}</div>
+                <button type="button" class="btn btn-sm btn-light bdrs-0 ti-pencil-alt" (click)="setScoreForMaxState('maxstate')"
+                  data-toggle="modal" data-target="#exampleModal" data-whatever="@mdo"></button>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="maxDistData.length">
+            <canvas baseChart #maxDistrictChart [datasets]="barChartMaxData" [labels]="barChartLabels" [options]="barChartOptions"
+              [legend]="barChartLegend" [chartType]="barChartType" [colors]="lineChartColors" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mb-1">
+        <div class="col-lg-12 border bgc-white paddding0">
+          <div class="content-header w-100 p-1">
+            <div class="filtring">
+              <h6><i class="ti-stats-down" style="color: #DC2A06;"></i> {{minDistrictName}}</h6>
+              <span class="align-right">
+                <div class="badge badge-pill badge-danger float-right mr-1">SCORE: {{lowesetScore}}</div>
+                <button type="button" class="btn btn-sm btn-light bdrs-0 ti-pencil-alt" data-toggle="modal" (click)="setScoreForMaxState('minstate')"
+                  data-target="#exampleModal" data-whatever="@mdo"></button>
+              </span>
+            </div>
+          </div>
+          <div *ngIf="minDistData.length">
+            <canvas baseChart #minDistrictChart [datasets]="barChartMinData" [labels]="barChartLabels" [options]="barChartOptions"
+              [legend]="barChartLegend" [chartType]="barChartType" [colors]="lineChartColors" (chartHover)="chartHovered($event)"
+              (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row margin0 margin-right0 table-sat">
+    <div class="col-md-6  bgc-white border paddding0" style="height: 400px; overflow-y: hidden">
+      <div class="content-header">
+        <h6><span class="ti-star"></span> All Districts</h6>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-sm header-fixed">
+          <thead class="thead-light">
+            <tr>
+              <th scope="col">Districts</th>
+              <th scope="col">Previous Score</th>
+              <th scope="col">Current Score</th>
+              <th scope="col">Change</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let data of generalData;">
+              <td>{{data.dis}}</td>
+              <td class="text-center">{{data.PrevMonth.toFixed(0)}}</td>
+              <td class="text-center">{{data.CurMonth.toFixed(0)}}</td>
+              <td>
+                <div class="font-bold" [ngClass]="{'green': getDistrictScores(data), 'red' : !getDistrictScores(data)}">
+                  <i class="mr-3" [ngClass]="{'ti-stats-up': getDistrictScores(data), 'ti-stats-down' : !getDistrictScores(data)}"></i>
+                  {{getDistrictChangeValue(data)}} <span>({{getDistPercentage(data)}}%)</span>
+                </div>
+              </td>
+            </tr>
+            <tr *ngIf="!generalData || generalData.length==0" style="height: 100%">
+              <div class="no-table-data">Loading...</div>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+    <div class="col-md-6 bgc-white border paddding2">
+      <div class="header">
+        <div class="filtring">
+          <div class="content-head mr-1">
+            <h6><span class="ti-pie-chart"></span> Compare Districts</h6>
+          </div>
+          <div class="sel mr-1">
+            <select id="inputState" class="form-control bdrs-0" [(ngModel)]="seleteddis1" (change)="getDistrict1($event)">
+              <option selected disabled>District 1</option>
+              <option value="{{item}}" *ngFor="let item of districtsforParticularState">{{item}}</option>
+            </select>
+          </div>
+          <div class="sel mr-1">
+            <select id="inputState" class="form-control bdrs-0" [(ngModel)]="seleteddis2" (change)="getDistrict2($event)">
+              <option selected disabled>District 2</option>
+              <option value="{{item}}" *ngFor="let item of districtsforParticularState">{{item}}</option>
+            </select>
+          </div>
+          <button class="btn btn-danger  btn-sm bdrs-0 mr-2 redbutton go" (click)="campareTwoDistricts()">GO</button>
+        </div>
+      </div>
+      <div class="chart-details-dashboard row">
+        <div *ngIf="pieChartDataDistrict2.length  && pieChartDataDistrict1.length">
+          <div class="pie-chart col-lg-6" style="top:50px">
+            <canvas baseChart height="270" [data]="pieChartDataDistrict1" [labels]="pieChartLabels" [chartType]="pieChartType"
+              (chartHover)="chartHovered($event)" [colors]="pieChartColors" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+          <div class="pie-chart col-lg-6" style="top:120px">
+            <canvas baseChart height="190" [data]="pieChartDataDistrict2" [labels]="pieChartLabels" [legend]="false"
+              [chartType]="pieChartType" (chartHover)="chartHovered($event)" [colors]="pieChartColors" (chartClick)="chartClicked($event)"></canvas>
+          </div>
+        </div>
+        <div class="info-msg" *ngIf="!pieChartDataDistrict2.length || !pieChartDataDistrict1.length">
+          <h4>Please select the districts to compare </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-md" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">SET SCORE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div>
+        <p class="alert alert-danger" *ngIf="errormsg">Total of all the feilds must be 100%</p>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="setScoreForm">
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="General" formControlName="General" id="recipient-name">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">%</span>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="Training" formControlName="Training" id="recipient-name">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">%</span>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="Equip & D" formControlName="Equip" id="recipient-name">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">%</span>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="Infra" formControlName="Infra" id="recipient-name">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">%</span>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="Manpower" formControlName="Manpower" id="recipient-name">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">%</span>
+            </div>
+          </div>
+
+          <div class="input-group mb-3">
+            <input type="number" class="form-control" placeholder="L&D" formControlName="LD" id="recipient-name">
+            <div class="input-group-append">
+              <span class="input-group-text" id="basic-addon2">%</span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal" [disabled]="!setScoreForm.valid" (click)="submitForm()">Save</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,162 @@
+<div class="content">
+  <div class="row m-1">
+    <div class="col-10 bgc-white border padl-r-0">
+      <!--*ngIf="showCompareData"-->
+      <div class="row m-1 " id="print-section">
+        <div class="col-md-6 padl-r-0 alert-light mgr-5 firstrow">
+          <div class="bgc-white p-2 subheading">
+            <h6 class="lh-1">{{selectedState1 || 'STATE 1'}} | <span class="blue">{{ selected_districts1 || 'DISTRICT
+                1'}}</span></h6>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              General
+              <span class="badge badge-primary badge-pill">{{district1CamapreData.General?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Manpower
+              <span class="badge badge-secondary badge-pill">{{district1CamapreData.Manpower?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Infrastructure
+              <span class="badge badge-success badge-pill">{{district1CamapreData.Infra?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Trainings
+              <span class="badge badge-danger badge-pill">{{district1CamapreData.Training?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              L & D
+              <span class="badge badge-warning badge-pill">{{district1CamapreData.LAndD?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Equipment & D
+              <span class="badge badge-info badge-pill">{{district1CamapreData.EquipAndD?.toFixed(0) || '0'}}</span>
+            </li>
+          </ul>
+        </div>
+
+
+        <div class="col padl-r-0 alert-light">
+          <div class="layers bgc-white p-2 subheading">
+            <h6 class="lh-1">{{selectedState2 || 'STATE 2'}} | <span class="blue"> {{ selected_districts2 || 'DISTRICT
+                2'}}</span></h6>
+          </div>
+          <div class="layer w-100">
+            <div class="peers ai-sb fxw-nw">
+              <div class="peer peer-greed">
+                <span id="sparklinedash2"></span>
+              </div>
+            </div>
+          </div>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              General
+              <span class="badge badge-primary badge-pill">{{district2CamapreData.General?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Manpower
+              <span class="badge badge-secondary badge-pill">{{district2CamapreData.Manpower?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Infrastructure
+              <span class="badge badge-success badge-pill">{{district2CamapreData.Infra?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Trainings
+              <span class="badge badge-danger badge-pill">{{district2CamapreData.Training?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              L & D
+              <span class="badge badge-warning badge-pill">{{district2CamapreData.LAndD?.toFixed(0) || '0'}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Equipment & D
+              <span class="badge badge-info badge-pill">{{district2CamapreData.EquipAndD?.toFixed(0) || '0'}}</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="col-md-3 h-100 bd p-1 bgc-white border filter-bar">
+
+      <form class="filter">
+        <p *ngIf="errormsg" class="error-msg"> please select all feilds</p>
+        <div class="form">
+          <div class="form-group col">
+            <select name="inputState1" [(ngModel)]="selectedState1" class="form-control bdrs-0" (change)="changeState1($event)">
+              <option value=''>State 1</option>
+              <option value="{{item}}" *ngFor="let item of allStateName">{{item}}</option>
+            </select>
+          </div>
+          <div class="form-group col">
+            <select name="inputDist1" [(ngModel)]="selected_districts1" class="form-control bdrs-0" (change)="getDistrict1($event)">
+              <option value=''> District 1</option>
+              <option value="{{item}}" *ngFor="let item of districts1">{{item}}</option>
+            </select>
+          </div>
+          <div class="form-group col">
+            <select name="inputState2" [(ngModel)]="selectedState2" class="form-control bdrs-0" (change)="changeState2($event)">
+              <option value=''>State 2</option>
+              <option value="{{item}}" *ngFor="let item of allStateName">{{item}}</option>
+            </select>
+          </div>
+          <div class="form-group col">
+            <select name="inputDist2" [(ngModel)]="selected_districts2" class="form-control bdrs-0" (change)="getDistrict2($event)">
+              <option value=''>District 2</option>
+              <option value="{{item}}" *ngFor="let item of districts2">{{item}}</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form">
+          <div class="form-group col">
+            <select name="inputForm" [(ngModel)]="selected_form" class="form-control bdrs-0" (change)="getForm($event)">
+              <option value=''>Form</option>
+              <option value="{{item}}" *ngFor="let item of forms">{{item}}</option>
+            </select>
+          </div>
+          <!-- <div class="form-group col">
+            <select id="inputState" class="form-control bdrs-0" (change)="getservicePoint($event)">
+              <option selected disabled>Service point</option>
+              <option value="{{item}}" *ngFor="let item of service_points">{{item}}</option>
+            </select>
+          </div> -->
+          <!-- <div class="form-group col bdrs-0">
+            <div class="timepicker-input input-icon form-group">
+              <div class="input-group">
+                <input type="date" class="form-control bdc-grey-200 start-date" placeholder="Datepicker" (change)="getdate($event)">
+              </div>
+            </div>
+          </div> -->
+        </div>
+      </form>
+      <div class="p-1">
+        <button class="btn btn-block btn-danger bdrs-0 mr-2 redbutton" (click)="campareStateData()">Compare</button>
+        <button class="btn btn-block btn-light bdrs-0" (click)="clearFields()">Clear</button>
+        <button class="btn btn-block btn-info bdrs-0 mr-2" (click)="onPrint()">Print</button>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+  <div *ngIf="showCompareData" class="row m-1">
+    <div class="col-10  bgc-white border">
+      <div class="row m-1">
+        <div class="pie-chart col-md-6 firstrow">
+          <canvas baseChart height="170" [data]="pieChartDataDistrict1" [labels]="pieChartLabels" [chartType]="pieChartType"
+            (chartHover)="chartHovered($event)" [colors]="pieChartColors" (chartClick)="chartClicked($event)"></canvas>
+        </div>
+        <div class="pie-chart col-md-6" style="top:58px;">
+          <canvas baseChart height="130" [legend]="false" [data]="pieChartDataDistrict2" [labels]="pieChartLabels"
+            [chartType]="pieChartType" (chartHover)="chartHovered($event)" [colors]="pieChartColors" (chartClick)="chartClicked($event)"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,275 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "assets/styles/layout.less";
+@import "assets/styles/layout.css";
+@import "assets/styles/mixins.css";
+@import "assets/styles/page-styles.css";
+@import "assets/styles/themify-icons.css";
+@import "assets/styles/variables.css";
+@import "assets/styles/ie7.css";
+/*@import "assets/styles/custom.scss";*/
+
+html,
+body {
+    height: 100% !important;
+    width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.h-100 {
+    height: 100%;
+}
+
+.table .thead-light th {
+    color: #495057;
+    background-color: #f9f8fb;
+    border-color: #f9f8fb;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.bgc-grey {
+    background-color: #f9fafb;
+}
+
+.bgc-white {
+    background-color: #ffffff;
+}
+
+.brd {
+    border: 1px solid rgba(0, 0, 0, .0625);
+}
+
+.brd-b {
+    border-bottom: 1px solid rgba(0, 0, 0, .0625);
+}
+
+.bdrs-0 {
+    border-radius: 0;
+}
+
+.placeholder {
+    font-size: 13px;
+    color: #b9b9b9;
+}
+
+/* scrolbar css start */
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 4px transparent;
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, .3);
+    background-color: #DC2A06;
+}
+
+::-moz-track {
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+::-moz-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+}
+
+::-moz-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, .3);
+    background-color: #DC2A06;
+}
+
+::-ms-track {
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    background-color: transparent;
+}
+
+::-ms-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+}
+
+::-ms-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 4px rgba(0, 0, 0, .3);
+    background-color: #DC2A06;
+}
+
+.redbutton {
+    color: #fff;
+    background-color: #DC2A06;
+    border-color: #DC2A06;
+    padding: 8px 50px;
+    border-radius: 5px;
+    &:hover {
+        background: #dc2a06d6;
+        transition: 0.5s;
+    }
+    .go {
+        padding: 8px 10px;
+    }
+}
+
+select:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    border-color: #ccc !important;
+}
+
+/* scrolbar css end */
+
+/*loader */
+
+.loader-parent {
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0;
+    position: fixed;
+    display: block;
+    opacity: 0.9;
+    z-index: 99999999;
+    text-align: center;
+    background: @red;
+    .loader {
+        position: inherit;
+        top: 45%;
+        left: 50%;
+    }
+}
+
+@keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        -ms-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        -ms-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+    }
+}
+
+@-ms-keyframes spinner {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        -ms-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+        transform: rotate(360deg);
+        -ms-transform: rotate(360deg);
+    }
+}
+
+@keyframes spinner_reverse {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        -ms-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+        -ms-transform: rotate(-360deg);
+    }
+}
+
+@-webkit-keyframes spinner_reverse {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        -ms-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+        -ms-transform: rotate(-360deg);
+    }
+}
+
+@-ms-keyframes spinner_reverse {
+    0% {
+        -webkit-transform: rotate(0);
+        transform: rotate(0);
+        -ms-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(-360deg);
+        transform: rotate(-360deg);
+        -ms-transform: rotate(-360deg);
+    }
+}
+
+.spinner {
+    position: relative;
+}
+
+.spinner div {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    top: 7px;
+    left: 7px;
+    border-radius: 50%;
+    border: 6px solid @red;
+    border-color: @red transparent @red transparent;
+    -webkit-animation: spinner 1.7s linear infinite;
+    animation: spinner 1.7s linear infinite;
+    -ms-animation: spinner 1.7s linear infinite;
+}
+
+.spinner .gray-spinner {
+    width: 50px;
+    height: 50px;
+    top: 20px;
+    left: 20px;
+    border-color: transparent #ccc transparent #ccc;
+    -webkit-animation: spinner_reverse 1.7s linear infinite;
+    animation: spinner_reverse 1.7s linear infinite;
+    -ms-animation: spinner_reverse 1.7s linear infinite;
+}
+
+.spinner {
+    background: @red;
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    border: 4px solid #dd9dff;
+    border-radius: 50%;
+    -webkit-transform: translate(-56.5px, -56.5px) scale(0.565) translate(56.5px, 56.5px);
+    transform: translate(-56.5px, -56.5px) scale(0.565) translate(56.5px, 56.5px);
+    -ms-transform: translate(-56.5px, -56.5px) scale(0.565) translate(56.5px, 56.5px);
+}

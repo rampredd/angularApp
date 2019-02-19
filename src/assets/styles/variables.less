@@ -1,0 +1,48 @@
+@base-font-size: 15px;
+@font-family: 'Roboto', sans-serif;
+@base-color: #444;
+@white: #fff;
+@black: #000;
+@lt-grey: #f9f8fb;
+@bdr-grey: #e8e8e8;
+@red: #ff2a2a;
+@blue: #3f48cc;
+@lt-skyblue: #00b8ff;
+@skyblue: #00c2e8;
+@yellow: #ff8000;
+@green: #27d88b;
+
+@regular: 400;
+@medium: 500;
+@bold: 700;
+@img-url: '../images';
+@row-spacing: 30px;
+
+/*** Breakpoints **/
+@highdensity: ~ "only screen and (-webkit-min-device-pixel-ratio: 1.5)",
+~ "only screen and (min--moz-device-pixel-ratio: 1.5)",
+~ "only screen and (-o-min-device-pixel-ratio: 3/2)",
+~ "only screen and (min-device-pixel-ratio: 1.5)";
+@mobile: ~ "only screen and (max-width: 767px)";
+@desktop: ~ "only screen and (min-width: 768px) and (max-width: 991px)";
+@desktop-md: ~ "only screen and (min-width: 992px) and (max-width: 1199px)";
+@desktop-lg: ~ "only screen and (min-width: 1200px)";
+@full-xl: ~ "only screen and (min-width: 1440px)";
+
+.font-size(@sv) {
+    @sizeValue: unit(@sv);
+    @remValue: (@sizeValue / @base-font-size);
+    font-size: unit(@sv, px);
+    font-size: unit(@remValue, rem);
+}
+
+.linkColor(@color) {
+    color: @color;
+    &:hover,
+    &:focus,
+    &:active {
+        color: lighten(@color, 10%);
+        text-decoration: none;
+        outline: none;
+    }
+}
